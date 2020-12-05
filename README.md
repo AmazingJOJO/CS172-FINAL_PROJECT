@@ -1,2 +1,2 @@
 # CS172-FINAL_PROJECT
-This repository is for CS172 FINAL_PROJECT:APPLE COUNTING
+This repository is for CS172 FINAL_PROJECT:Apple Counting
