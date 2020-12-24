@@ -2,35 +2,9 @@ import cv2
 import numpy as np
 import os
 from pylsd.lsd import lsd
-<<<<<<< HEAD:Test/lsd.py
-
-
-fullName = '000033.jpg'
-folder, imgName = os.path.split(fullName)
-src = cv2.imread(fullName, cv2.IMREAD_COLOR)
-height = src.shape[1]
-weight = src.shape[0]    
-image = cv2.imread(fullName, cv2.IMREAD_COLOR)
-gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
-lines = lsd(gray)
-for i in xrange(lines.shape[0]):
-    pt1 = (int(lines[i, 0]), int(lines[i, 1]))
-    pt2 = (int(lines[i, 2]), int(lines[i, 3]))
-    width = lines[i, 4]
-    cv2.line(src, pt1, pt2, (0,0, 0), int(np.ceil(width / 2)))
-    #print(pt1,pt2)
-gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
-cv2.imshow("img2", gray) 
-
-ret, binary = cv2.threshold(gray,10,255,cv2.THRESH_BINARY)  
- 
-contours, hierarchy = cv2.findContours(binary, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-#print("coun:",contours[0],contours[1])
-=======
->>>>>>> cf54b2984186129873db3d2e48f81334e9bef780:lsd.py
 
 def Gaussian_Blur(gray):
-    blurred = cv2.GaussianBlur(gray, (9, 9),0)
+    blurred = cv2.GaussianBlur(gray, (7, 7),0)
     
     return blurred
 
@@ -51,11 +25,11 @@ def FindApple(img):
         pt1 = (int(lines[i, 0]), int(lines[i, 1]))
         pt2 = (int(lines[i, 2]), int(lines[i, 3]))
         width = lines[i, 4]
-        cv2.line(blur, pt1, pt2, (255,255, 255), int(np.ceil(width/2)))
+        cv2.line(blur, pt1, pt2, (0,0,0), int(np.ceil(width*2.2)))
         #print(pt1,pt2)
     #gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
     
-    ret, binary = cv2.threshold(blur,200,255,cv2.THRESH_BINARY)  
+    ret, binary = cv2.threshold(blur,5,255,cv2.THRESH_BINARY)  
     cv2.imshow("img2", binary)
     contours, hierarchy = cv2.findContours(binary, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
     #print("coun:",contours[0],contours[1])
@@ -78,7 +52,9 @@ def FindApple(img):
         
         x, y, w, h = cv2.boundingRect(c)
         
-        cv2.rectangle(src, (x,y), (x+w, y+h), (0, 255, 0), 2) 
+        cv2.rectangle(src, (x, y), (x + w, y + h), (0, 255, 0), 2)
+    #print(crop_img.shape)
+    crop_img =crop_img[0:crop_img.shape[0]/3,0:crop_img.shape[1]/2]
     #cv2.rectangle(src, (x,y), (x+w, y+h), (0, 255, 0), 2)
     #draw_img = cv2.drawContours(src.copy(), [box], -1, (0, 0, 255), 2)
     """Xs = [i[0] for i in box]
@@ -95,18 +71,7 @@ def FindApple(img):
     #cv2.waitKey(0)
     return crop_img
 
-<<<<<<< HEAD:Test/lsd.py
-cv2.imshow("or",src)
-cv2.imshow("result", crop_img)
-#cv2.imshow("contour", draw_img)  
-cv2.waitKey(0)  
-cv2.imwrite(os.path.join(folder, 'cv2_' + imgName.split('.')[0] + '.jpg'), src)
-
-
-
-=======
-img ='0025.jpg'
+img ='0009.png'
 i = FindApple(img)
 cv2.imshow("result", i)
 cv2.waitKey(0)
->>>>>>> cf54b2984186129873db3d2e48f81334e9bef780:lsd.py
