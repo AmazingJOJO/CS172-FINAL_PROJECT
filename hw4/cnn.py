@@ -3,7 +3,7 @@ import scipy.io as sio
 import numpy as np
 import matplotlib.pyplot as plt
 
-import torch
+import torch as torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torch import optim
@@ -44,7 +44,7 @@ class mBlock(nn.Module):
         #print("forward finish")
         return out
     
-    
+
 class mUpblock(nn.Module):
     def __init__(self, c_in, c_out,s = 1):
         super(mUpblock, self).__init__()

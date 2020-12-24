@@ -2,6 +2,8 @@ import cv2
 import numpy as np
 import os
 from pylsd.lsd import lsd
+
+
 fullName = '000033.jpg'
 folder, imgName = os.path.split(fullName)
 src = cv2.imread(fullName, cv2.IMREAD_COLOR)
@@ -18,6 +20,7 @@ for i in xrange(lines.shape[0]):
     #print(pt1,pt2)
 gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
 cv2.imshow("img2", gray) 
+
 ret, binary = cv2.threshold(gray,10,255,cv2.THRESH_BINARY)  
  
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
@@ -62,3 +65,6 @@ cv2.imshow("result", crop_img)
 #cv2.imshow("contour", draw_img)  
 cv2.waitKey(0)  
 cv2.imwrite(os.path.join(folder, 'cv2_' + imgName.split('.')[0] + '.jpg'), src)
+
+
+
