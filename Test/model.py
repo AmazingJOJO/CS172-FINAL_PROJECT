@@ -7,7 +7,7 @@ from torch import optim
 from torch.optim import lr_scheduler
 from torch.utils.data import TensorDataset
 from torch.utils.data import DataLoader
-import lsd2
+import lsd
 import cv2
 import numpy as np
 
@@ -15,11 +15,12 @@ import numpy as np
     
 def get_images():
     img = []
+    name = lsd.FindApple("Apple.png")
+
     im = cv2.imread('000004.jpg')
     resized = cv2.resize(im, (224,224), interpolation = cv2.INTER_AREA)
     img.append(resized)
-
-    name = lsd2.FindApple("000006.jpg")
+    
     #print(name)
     #name = ['010.png','000002.jpg','1.png','1.PNG','2.png']
     #name = ['iphone 11','iphone8plus','11pro','11pro']
