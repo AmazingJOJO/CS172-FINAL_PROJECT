@@ -1,4 +1,4 @@
 # CS172-FINAL_PROJECT
 This repository is for CS172 FINAL_PROJECT:Apple Counting
 
-See the four python files for codes
+See the six python files for codes
