@@ -13,11 +13,11 @@ import numpy as np
 
    
     
-def get_images():
+def get_images(image):
     img = []
-    name = lsd.FindApple("Apple.png")
+    name = lsd.FindApple(image)
 
-    im = cv2.imread('000004.jpg')
+    im = cv2.imread('000009.jpg')
     resized = cv2.resize(im, (224,224), interpolation = cv2.INTER_AREA)
     img.append(resized)
     
@@ -33,36 +33,4 @@ def get_images():
 
 
 
-#training(100)
 
-'''
-model = torch.load('best_model_50.pkl',map_location='cpu')
-dev = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
-model = model.to(dev)
-train_dl,test_dl = load_data(32)
-print(testing(model,test_dl))
-'''
-
-classes = np.load('classes.npy',allow_pickle=True)
-print(classes)
-
-images = []
-model = torch.load('best_model_50.pkl',map_location='cpu')
-dev = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
-model = model.to(dev)
-
-
-images = get_images()
-images = np.asarray(images)
-
-#resized = np.asarray(resized)
-
-x = torch.from_numpy(images).float() / 255
-x = np.transpose(x,(0,3,2,1))
-with torch.no_grad():
-    x = x.to(dev, dtype = torch.float)
-    outputs = model(x)
-    print(outputs)
-    _, predicted = torch.max(outputs.data, 1)
-    print(classes[predicted[1:]])
-#print(testing(model,test_dl))

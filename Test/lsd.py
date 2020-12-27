@@ -33,7 +33,7 @@ def FindApple(img):
         pt1 = (int(lines[i, 0]), int(lines[i, 1]))
         pt2 = (int(lines[i, 2]), int(lines[i, 3]))
         width = lines[i, 4]
-        cv2.line(blur, pt1, pt2, (0,0,0), int(np.ceil(width)))
+        cv2.line(blur, pt1, pt2, (0,0,0), int(np.ceil(width))) #draw lines in blurred image
         #print(pt1,pt2)
     #gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
     
@@ -59,7 +59,7 @@ def FindApple(img):
     c_all = sorted(contours, key = cv2.contourArea, reverse = True)
     x1, y1, w1, h1 = cv2.boundingRect(c_all[0])
     
-    if float((w1 * h1)) / float((height * weight)) > 0.95:  #image itself
+    if float((w1 * h1)) / float((height * weight)) > 0.9:  #image itself
         print("cut")
         c_all = c_all[1:]
     c_new = []
@@ -147,7 +147,7 @@ def FindApple(img):
     #return result
     #print(len(result))
     """for i in range(len(result)):
-        cv2.imshow("camera", result[i]) """
+        cv2.imshow("camera" + str(i), result[i]) """
     cv2.waitKey(0)
     return result
 
