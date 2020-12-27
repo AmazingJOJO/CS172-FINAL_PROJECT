@@ -1,4 +1,5 @@
 import model
+import argparse
 #training(100)
 
 '''
@@ -9,7 +10,11 @@ train_dl,test_dl = load_data(32)
 print(testing(model,test_dl))
 '''
 def main():
-    imagePath = ""
+    parser = argparse.ArgumentParser()
+    parser.add_argument('filename', help='FullHead.mhd.')
+    args = parser.parse_args()
+    imagePath = args.filename
+    
     classes = ['iPhone8','iPhoneXR','iPhone11/12','iPhone8Plus','iPhone11Pro/12Pro','iPhoneX']
     print(classes)
 
