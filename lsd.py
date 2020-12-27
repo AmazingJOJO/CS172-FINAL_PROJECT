@@ -43,19 +43,6 @@ def FindApple(img):
     contours, hierarchy = cv2.findContours(binary, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
     #print("coun:",contours[0],contours[1])
 
-    """c1 = sorted(contours, key=cv2.contourArea, reverse=True)[0]
-    c2 = sorted(contours, key=cv2.contourArea, reverse=True)[1]
-    #print("c:",c[0],c[1],c[2],c[3])
-    # compute the rotated bounding box of the largest contour
-
-    x1, y1, w1, h1 = cv2.boundingRect(c1)
-    x2, y2, w2, h2 = cv2.boundingRect(c2)
-    if (w1 * h1) / (height * weight) > 0.95:
-        #print(w1, h1)
-        #print(height,weight)
-        crop_img = image[y2:y2 + h2, x2:x2 + w2]
-    else:
-        crop_img = image[y1:y1 + h1, x1:x1 + w1]"""
     c_all = sorted(contours, key = cv2.contourArea, reverse = True)
     x1, y1, w1, h1 = cv2.boundingRect(c_all[0])
     
@@ -106,8 +93,6 @@ def FindApple(img):
         else:
             break
     count = 0
-    """for rawdata in crop_imgs:
-        if crop_imgs[]"""
     result = []
     
     for crop_img_i in crop_imgs:
@@ -132,15 +117,6 @@ def FindApple(img):
     #crop_img =crop_img[0:crop_img.shape[0]/3,0:crop_img.shape[1]/2]
     #cv2.rectangle(src, (x,y), (x+w, y+h), (0, 255, 0), 2)
     #draw_img = cv2.drawContours(src.copy(), [box], -1, (0, 0, 255), 2)
-    """Xs = [i[0] for i in box]
-    Ys = [i[1] for i in box]
-    x1 = min(Xs)
-    x2 = max(Xs)
-    y1 = min(Ys)
-    y2 = max(Ys)
-    hight = y2 - y1
-    width = x2 - x1
-    crop_img = src[y1:y1+hight, x1:x1+width]"""
     #print(src.shape)
     cv2.imshow("contour", src)
     #cv2.waitKey(0)
@@ -151,12 +127,4 @@ def FindApple(img):
     cv2.waitKey(0)
     return result
 
-"""img ='000004.jpg'
-images = FindApple(img)
-#print(len(images))
-count = 0
-for i in images:
-    cv2.imshow("result " + str(count), i)
-    count += 1
-    
-cv2.waitKey(0)"""
+

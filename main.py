@@ -1,4 +1,3 @@
-import model
 import argparse
 import numpy as np
 import torch
@@ -9,6 +8,7 @@ from torch.optim import lr_scheduler
 from torch.utils.data import TensorDataset
 from torch.utils.data import DataLoader
 import cv2
+import lsd
 #training(100)
 
 '''
@@ -18,6 +18,24 @@ model = model.to(dev)
 train_dl,test_dl = load_data(32)
 print(testing(model,test_dl))
 '''
+def get_images(image):
+    img = []
+    name = lsd.FindApple(image)
+
+    im = cv2.imread('000009.jpg')
+    resized = cv2.resize(im, (224,224), interpolation = cv2.INTER_AREA)
+    img.append(resized)
+    
+    #print(name)
+    #name = ['010.png','000002.jpg','1.png','1.PNG','2.png']
+    #name = ['iphone 11','iphone8plus','11pro','11pro']
+    for each in name:
+        
+        resized = cv2.resize(each, (224,224), interpolation = cv2.INTER_AREA)
+        img.append(resized)
+    return img
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('filename', help='FullHead.mhd.')
@@ -27,7 +45,7 @@ def main():
     classes = ['iPhone8','iPhoneXR','iPhone11/12','iPhone8Plus','iPhone11Pro/12Pro','iPhoneX/Xs']
     print(classes)
 
-    images = model.get_images(imagePath)
+    images = get_images(imagePath)
     m_images = np.asarray(images)
     x = torch.from_numpy(m_images).float() / 255
     x = np.transpose(x,(0,3,2,1))
@@ -60,7 +78,7 @@ def main():
 
     for i in range(1,len(images)):
         cv2.imshow("camera"+ str(i), images[i]) 
-    cv2.waitKey(0)
+    #cv2.waitKey(0)
 
 
     #print(testing(model,test_dl))
