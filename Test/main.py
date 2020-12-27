@@ -24,7 +24,7 @@ def main():
     args = parser.parse_args()
     imagePath = args.filename
     
-    classes = ['iPhone8','iPhoneXR','iPhone11/12','iPhone8Plus','iPhone11Pro/12Pro','iPhoneX']
+    classes = ['iPhone8','iPhoneXR','iPhone11/12','iPhone8Plus','iPhone11Pro/12Pro','iPhoneX/Xs']
     print(classes)
 
     images = model.get_images(imagePath)
